@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+    <html>
+        <head>
+            <meta http-equiv="x-ua-compatible" content="IE=edge">
+            <title>QC Web Tool</title>
+            <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+            <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.0.0/polyfill.min.js"></script>
+            <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.32.4/react-bootstrap.min.js"></script>
+        </head>
+        <body>
+            <script type="text/babel">
+
+                const Button = window.ReactBootstrap.Button
+                const Navbar = window.ReactBootstrap.Navbar
+                const NavItem = window.ReactBootstrap.NavItem
+                const Nav = window.ReactBootstrap.Nav
+            
+                class App extends React.Component {
+                    constructor(props) {
+                    super(props)
+
+                        this.state = { view: 'Home' }
+
+                        this._changeView = this._changeView.bind(this)
+                    }
+
+                    _changeView(view) {
+                        switch(view) {
+                            case 'Home' :
+                                this.setState({view: 'Home'})
+                                break
+                            case 'About' :
+                                this.setState({view: 'About'})
+                                break
+                            case 'Contact' :
+                                this.setState({view: 'Contact'})
+                                break
+                            default:
+                                this.setState({view: 'Home'}) 
+                        }   
+                    }
+
+                    render() {
+                        const { view } = this.state
+                        const { _changeView } = this
+
+                        return(
+                            <div>
+                            
+                                {/* Navigation */}
+                                <Navbar>
+                                    <Navbar.Header>
+                                        <Navbar.Brand>
+                                            <a href="#"> React App</a>
+                                        </Navbar.Brand>
+                                    </Navbar.Header>
+                                    <Nav>
+                                        <NavItem onClick={() => _changeView('Home')}> Home </NavItem>
+                                        <NavItem onClick={() => _changeView('About')}> About </NavItem>
+                                        <NavItem onClick={() => _changeView('Contact')}> Contact </NavItem>
+                                    </Nav>
+                                </Navbar>
+                            
+                                {/* Routes */}
+                                {
+                                    view === 'Home'    ? <Home /> :
+                                    view === 'About'   ? <About /> :
+                                    view === 'Contact' ? <Contact /> :
+                                    <Unknown />                
+                                }
+                            </div>
+                        )
+                    }
+                }
+
+                const Home = () => (
+                    <div style={{textAlign: 'center',paddingTop: '100px'}}>
+                        <h1> Welcome to the Home Page!</h1>
+                        <h3> Place your content here.</h3>    
+                    </div>
+                )
+
+                const About = () => (
+                <div style={{textAlign: 'center', paddingTop: '100px' }}>
+                    <h1> Welcome to the About Page!</h1>
+                    <h3> Place your content here.</h3>
+                </div>
+                )
+
+                const Contact = () => (
+                <div style={{textAlign: 'center', paddingTop: '100px' }}>
+                    <h1> Welcome to the Contact Page!</h1>
+                    <h3> Place your content here.</h3>
+                </div>
+                )
+
+                const Unknown = () => (
+                <div style={{textAlign: 'center', paddingTop: '100px' }}>
+                    <h1> Welcome to the Unknown Page!</h1>
+                    <h3> I'm not sure why you are here..</h3>
+                </div>
+                )
+
+                ReactDOM.render(
+                    <App />,
+                    document.getElementById('root')
+                )
+
+            </script>
+            <div id="root"></div>
+
+            <!-- Latest compiled and minified CSS -->
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        </body>
+    </html>
